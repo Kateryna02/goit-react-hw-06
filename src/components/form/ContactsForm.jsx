@@ -1,10 +1,18 @@
 
+
+
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { nanoid } from 'nanoid';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import s from "./Form.module.css";
+import { addContact } from '../../redux/contactsSlice';
 
-const ContactsForm = ({ onAddContact, contacts }) => {
+const ContactsForm = () => {
+    const dispatch = useDispatch();
+    const contacts = useSelector(state => state.contacts.items);
+
     const initialValues = {
         name: '',
         number: '',
@@ -28,7 +36,7 @@ const ContactsForm = ({ onAddContact, contacts }) => {
             alert(`${name} or ${number} already exists.`);
             return;
         }
-        onAddContact(values);
+        dispatch(addContact({ id: nanoid(), ...values }));
         resetForm();
     };
 

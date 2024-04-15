@@ -3,3 +3,7 @@
     border-radius: 8px;
     padding: 12px;
 }
+.app{
+        width: fit-content;
+            margin: 20px auto;
+        }
